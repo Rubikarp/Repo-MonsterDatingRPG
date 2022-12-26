@@ -7,5 +7,5 @@ using NaughtyAttributes;
 public class CardData : ScriptableObject
 {
     public CardContext context;
-    public CardStat stats;
+    public CardStats stats;
 }

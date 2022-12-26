@@ -12,48 +12,51 @@ using UnityEditor;
 
 public class SwipeCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    [SerializeField, ReadOnly] private Vector2 _beginPos;
+    private Vector2 _beginPos => transform.parent.position;
     [SerializeField, ReadOnly] private Vector2 _aimPos;
-    [SerializeField, ReadOnly] private Quaternion _beginRot;
 
     [SerializeField, Range(0, 1)] private float swipeEdge = 0.75f;
     [SerializeField] private float lerpMoveSpeed = 8f;
     [SerializeField] private float lerpRotaSpeed = 8f;
     [SerializeField] private float bendAngle = 30;
 
-    public UnityEvent<bool> OnSwipe;
+    public bool isSwipping = false;
+    public UnityEvent<bool> onSwipe;
+    public UnityEvent<float> onSwipping;
 
     private void Awake()
     {
         transform.position = new Vector3(transform.position.x, Screen.height / 2, transform.position.z);
-        _aimPos = _beginPos = transform.position;
-        _beginRot = transform.rotation;
+        _aimPos = _beginPos;
     }
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, _aimPos, Time.deltaTime * lerpMoveSpeed);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, Mathf.Clamp(PositionRelativeToScreen(transform), -1, 1) * -bendAngle), Time.deltaTime * lerpRotaSpeed);
+        transform.position = Vector3.Lerp(transform.position, isSwipping ? _aimPos : _beginPos, Time.deltaTime * lerpMoveSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, Mathf.Clamp(PositionRelativeToScreen(), -1, 1) * bendAngle), Time.deltaTime * lerpRotaSpeed);
     }
 
-    public void OnBeginDrag(PointerEventData eventData) { }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        isSwipping = true;
+    }
     public void OnDrag(PointerEventData eventData)
     {
         _aimPos = eventData.position;
+        onSwipping?.Invoke(PositionRelativeToScreen());
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        var centerDistance = ((_aimPos.x / Screen.width) - 0.5f) * 2;
+        isSwipping = false;
+
+        var centerDistance = PositionRelativeToScreen();
 
         if (Mathf.Abs(centerDistance) > swipeEdge)
         {
             transform.SetSiblingIndex(0);
-
             _aimPos = _beginPos;
-            //_aimPos += Mathf.Sign(centerDistance) * Vector2.right * Screen.width * 0.5f;
-
             transform.position = _beginPos;
             transform.rotation = Quaternion.identity;
-            OnSwipe?.Invoke(Mathf.Sign(centerDistance) > 0);
+            onSwipe?.Invoke(Mathf.Sign(centerDistance) > 0);
         }
         else
         {
@@ -64,7 +67,5 @@ public class SwipeCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
     /// <summary>
     /// Remap to -1 at the left edge, 0 at the center, 1 at the right edge
     /// </summary>
-    /// <param name="entity"></param>
-    /// <returns></returns>
-    private float PositionRelativeToScreen(Transform entity) => (Camera.main.ScreenToViewportPoint(entity.position).x - 0.5f) * 2;
+    private float PositionRelativeToScreen() => ((transform.parent.position.x - transform.position.x) * 2f) / Screen.width;
 }

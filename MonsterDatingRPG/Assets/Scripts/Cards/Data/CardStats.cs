@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class CardStat
+public class CardStats                                                                                 
 {
     [Range(0, 100)] public float Health = 50;
     [Space(10)]

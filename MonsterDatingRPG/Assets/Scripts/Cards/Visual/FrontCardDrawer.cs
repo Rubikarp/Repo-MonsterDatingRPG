@@ -3,9 +3,9 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-public class CardDrawer : MonoBehaviour
+public class FrontCardDrawer : MonoBehaviour
 {
-    public SelectionCard card;
+    public CardObject card;
 
     public Image img;
     public TextMeshProUGUI nameSlot;

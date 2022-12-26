@@ -5,7 +5,7 @@ using TMPro;
 
 public class BackCardDrawer : MonoBehaviour
 {
-    public SelectionCard card;
+    public CardObject card;
 
     public Slider HealthStat;
     public Slider ManaStat;

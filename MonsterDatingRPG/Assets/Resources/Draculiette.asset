@@ -15,9 +15,7 @@ MonoBehaviour:
   context:
     name: Draculiette
     ProfilPicture: {fileID: 21300000, guid: 92c823c5d442fbd4da9bc78cd325eef1, type: 3}
-    description: 'Alone in my mansion.
-
-      My parent are gone since 1897. '
+    description: "lorem ipsus toi m\xEAme tu sais"
   stats:
     Health: 84
     Mana: 9

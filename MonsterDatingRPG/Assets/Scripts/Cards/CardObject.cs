@@ -2,11 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
-public class SelectionCard : MonoBehaviour
+public class CardObject : MonoBehaviour
 {
-    [SerializeField] private SwipeCard swipe;
     public CardData data;
-
-
-
 }
