@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class CardStats                                                                                 
+public class CardStats
 {
-    [Range(0, 100)] public float Health = 50;
-    [Space(10)]
-    [Range(0, 10)] public float Mana = 5;
-    [Range(0, 10)] public float ManaRegen = 5;
-    [Space(10)]
-    [Range(0, 100)] public float PhysicStrenght = 50;
-    [Range(0, 100)] public float MentalStrenght = 50;
-    [Range(0, 100)] public float PhysicDefense = 50;
-    [Range(0, 100)] public float MentalDefense = 50;
+    [Range(0, 10)] public int level = 1;
+
+    private PlayerStats stats;
+    public float Ego => stats.ego;
+    public float Beauty => stats.beauty;
+    public float Chatter => stats.chatter;
+    public float Romantism => stats.romantism;
 }

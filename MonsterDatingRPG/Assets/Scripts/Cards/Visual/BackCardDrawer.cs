@@ -25,27 +25,18 @@ public class BackCardDrawer : MonoBehaviour
     {
         HealthStat.minValue = 0;
         HealthStat.maxValue = 100;
-        HealthStat.value = card.data.stats.Health;
+        HealthStat.value = card.data.stats.Ego;
 
-        ManaStat.minValue = 0;
-        ManaStat.maxValue = 10;
-        ManaStat.value = card.data.stats.Mana;
-        ManaRegenStat.minValue = 0;
-        ManaRegenStat.maxValue = 10;
-        ManaRegenStat.value = card.data.stats.ManaRegen;
-
-        PhysicStrenghtStat.minValue = 0;
-        PhysicStrenghtStat.maxValue = 10;
-        PhysicStrenghtStat.value = card.data.stats.PhysicStrenght;
         MentalStrenghtStat.minValue = 0;
         MentalStrenghtStat.maxValue = 100;
-        MentalStrenghtStat.value = card.data.stats.MentalStrenght;
+        MentalStrenghtStat.value = card.data.stats.Beauty;
 
         PhysicDefenseStat.minValue = 0;
         PhysicDefenseStat.maxValue = 100;
-        PhysicDefenseStat.value = card.data.stats.PhysicDefense;
+        PhysicDefenseStat.value = card.data.stats.Chatter;
+
         MentalDefenseStat.minValue = 0;
         MentalDefenseStat.maxValue = 100;
-        MentalDefenseStat.value = card.data.stats.MentalDefense;
+        MentalDefenseStat.value = card.data.stats.Romantism;
     }
 }
