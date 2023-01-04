@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class PlayerStats
+public class EntityStats
 {
     [Range(0, 100)] public float ego = 50;
     [Range(0, 100)] public float beauty = 50;
