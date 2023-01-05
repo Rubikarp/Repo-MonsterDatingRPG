@@ -5,7 +5,7 @@ public class CardStats
 {
     [Range(0, 10)] public int level = 1;
 
-    private EntityStats stats;
+    [SerializeField] private EntityStats stats;
     public float Ego => stats.ego;
     public float Beauty => stats.beauty;
     public float Chatter => stats.chatter;

@@ -7,9 +7,11 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 
-public class Leveling : MonoBehaviour
+public class PlayerLevel : MonoBehaviour
 {
     [SerializeField, Min(1)] public int currentLevel = 1;
+    [SerializeField, Min(0)] public int upgradePointAvailable = 0;
+    [Space(10)]
     [SerializeField] public float currentXp = 0f;
     [SerializeField] public float prevLevelXp = 0f;
     [SerializeField] public float nextLevelXp = 100f;
@@ -34,11 +36,12 @@ public class Leveling : MonoBehaviour
         if (currentXp >= nextLevelXp)
         {
             currentLevel++;
+            upgradePointAvailable++;
             onLevelUp?.Invoke();
 
             prevLevelXp = nextLevelXp;
             //Next level 150%
-            nextLevelXp += nextLevelXp * 0.33f;
+            nextLevelXp += nextLevelXp * (150f * 0.01f);
         }
     }
 

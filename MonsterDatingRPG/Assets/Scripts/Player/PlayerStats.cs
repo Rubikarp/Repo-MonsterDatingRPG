@@ -14,6 +14,7 @@ public enum StatsType
 
 public class PlayerStats : MonoBehaviour
 {
+    public PlayerLevel level;
     public EntityStats stats;
 
     [Button()]
@@ -46,6 +47,8 @@ public class PlayerStats : MonoBehaviour
     public void UpgradeStat(int statsType) => UpgradeStat((StatsType)statsType);
     public void UpgradeStat(StatsType statsType, float value = 10f)
     {
+        if (level.upgradePointAvailable <= 0) return;
+
         switch (statsType)
         {
             case StatsType.Ego:
@@ -62,6 +65,7 @@ public class PlayerStats : MonoBehaviour
                 break;
         }
 
+        level.upgradePointAvailable--;
         SaveStats();
         
     }
